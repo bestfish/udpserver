@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%7r] %6p - %30.30c - %m \n"/>
+        </layout>
+    </appender>
+   
+    <appender name="LOG-MAIN" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <param name="file" value="${logpath}/main.log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}] %6p - %30.30c - %m \n"/>
+        </layout>
+    </appender>
+    
+    <appender name="LOG-HANDLER" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <param name="file" value="${logpath}/handler.log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}] %6p - %30.30c - %m \n"/>
+        </layout>
+    </appender>
+    
+    <appender name="LOG-SCHEDULE" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <param name="file" value="${logpath}/schedule.log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}] %6p - %30.30c - %m \n"/>
+        </layout>
+    </appender>
+    
+    <category name="com.fish.play.server.handler" additivity="false">
+        <priority value="${loglevel}"/>
+        <appender-ref ref="LOG-HANDLER"/>
+    </category>
+    
+     <category name="com.fish.play.server.schedule" additivity="false">
+        <priority value="${loglevel}"/>
+        <appender-ref ref="LOG-SCHEDULE"/>
+    </category>
+   
+    <root>
+        <priority value="${loglevel}"/>
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="LOG-MAIN"/>
+    </root>
+</log4j:configuration>
