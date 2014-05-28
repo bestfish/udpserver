@@ -1,1 +1,1 @@
-lsof -i :8080 |awk '{if(NR==2){print $2}}' |xargs kill -9
+lsof -i :${port} |awk '{if(NR==2){print $2}}' |xargs kill -9
